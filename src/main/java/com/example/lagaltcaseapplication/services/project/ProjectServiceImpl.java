@@ -47,5 +47,31 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(projectMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ProjectDTO> getProjectsByUserId(Long userId) {
+        List<Project> projects = projectRepository.findByOwner_UserId(userId);
+        return projects.stream()
+                .map(projectMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProjectDTO updateProject(Long id, ProjectDTO updatedProjectDTO) {
+        Optional<Project> optionalProject = projectRepository.findById(id);
+
+        if (!optionalProject.isPresent()) {
+            throw new ProjectNotFoundException(id);
+        }
+
+        Project existingProject = optionalProject.get();
+        existingProject.setTitle(updatedProjectDTO.getTitle());
+        existingProject.setDescription(updatedProjectDTO.getDescription());
+        existingProject.setStatus(updatedProjectDTO.getStatus());
+
+        Project updatedProject = projectRepository.save(existingProject);
+        return projectMapper.toDTO(updatedProject);
+    }
+
 }
 

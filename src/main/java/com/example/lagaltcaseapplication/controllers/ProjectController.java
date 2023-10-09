@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.controllers;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
+import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Project;
 import com.example.lagaltcaseapplication.repository.ProjectRepository;
 import com.example.lagaltcaseapplication.services.project.ProjectService;
@@ -22,15 +23,21 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private ProjectMapper projectMapper;
+
+
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+    public ResponseEntity<ProjectDTO> getProjectById(@PathVariable Long id) {
         Optional<Project> optionalProject = projectRepository.findById(id);
         if (optionalProject.isPresent()) {
-            return new ResponseEntity<>(optionalProject.get(), HttpStatus.OK);
+            ProjectDTO projectDTO = projectMapper.toDTO(optionalProject.get());
+            return new ResponseEntity<>(projectDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @PostMapping("/")
     public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
         ProjectDTO createdProject = projectService.createProject(projectDTO);
@@ -41,6 +48,12 @@ public class ProjectController {
     public ResponseEntity<List<ProjectDTO>> getAllProjects() {
         List<ProjectDTO> allProjects = projectService.getAllProjects();
         return new ResponseEntity<>(allProjects, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO updatedProjectDTO) {
+        ProjectDTO updatedProject = projectService.updateProject(id, updatedProjectDTO);
+        return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
 }
 

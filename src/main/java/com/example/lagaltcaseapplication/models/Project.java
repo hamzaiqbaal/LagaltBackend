@@ -1,5 +1,6 @@
 package com.example.lagaltcaseapplication.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
+    @JsonBackReference
     private User owner;
 }
 
