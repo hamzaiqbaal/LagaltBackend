@@ -73,5 +73,24 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.toDTO(updatedProject);
     }
 
+    @Override
+    public void deleteProject(Long id) {
+        if (!projectRepository.existsById(id)) {
+            throw new ProjectNotFoundException(id);
+        }
+        projectRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProjectDTO> getProjectsBySkill(Long skillId) {
+        List<Project> projects = projectRepository.findProjectsBySkillId(skillId);
+        return projects.stream()
+                .map(projectMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+
+
+
 }
 

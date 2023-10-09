@@ -15,5 +15,11 @@ public interface ProjectService {
 
     ProjectDTO updateProject(Long id, ProjectDTO updatedProjectDTO);
 
+    void deleteProject(Long id);
+
+    List<ProjectDTO> getProjectsBySkill(Long skillId);
+
+
+
 
 }

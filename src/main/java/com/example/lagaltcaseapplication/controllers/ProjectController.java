@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.controllers;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
+import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Project;
 import com.example.lagaltcaseapplication.repository.ProjectRepository;
@@ -55,6 +56,25 @@ public class ProjectController {
         ProjectDTO updatedProject = projectService.updateProject(id, updatedProjectDTO);
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+        try {
+            projectService.deleteProject(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (ProjectNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/projects/skill/{skillId}")
+    public ResponseEntity<List<ProjectDTO>> getProjectsBySkill(@PathVariable Long skillId) {
+        List<ProjectDTO> projects = projectService.getProjectsBySkill(skillId);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+
+
 }
 
 
