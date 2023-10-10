@@ -41,4 +41,5 @@ public class User {
     @OneToMany(mappedBy = "owner")
     @JsonManagedReference
     private List<Project> projects;
+
 }
