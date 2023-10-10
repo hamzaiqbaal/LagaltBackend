@@ -8,5 +8,8 @@ public interface SkillService {
     List<SkillDTO> getAllSkills();
     SkillDTO getSkillById(Long id);
     SkillDTO createSkill(SkillDTO skillDTO);
+
+    List<SkillDTO> getSkillsByUserId(Long userId);
+
 }
 

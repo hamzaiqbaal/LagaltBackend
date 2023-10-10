@@ -22,7 +22,7 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public List<SkillDTO> getAllSkills() {
         List<Skill> skills = skillRepository.findAll();
-        return skills.stream().map(skillMapper::toDTO).collect(Collectors.toList());
+        return skills.stream().map(SkillMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -36,6 +36,12 @@ public class SkillServiceImpl implements SkillService {
         Skill skill = skillMapper.toEntity(skillDTO);
         Skill savedSkill = skillRepository.save(skill);
         return skillMapper.toDTO(savedSkill);
+    }
+
+    @Override
+    public List<SkillDTO> getSkillsByUserId(Long userId) {
+        List<Skill> skills = skillRepository.findSkillsByUserId(userId);
+        return skills.stream().map(SkillMapper::toDTO).collect(Collectors.toList());
     }
 }
 
