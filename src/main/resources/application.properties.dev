@@ -1,0 +1,10 @@
+spring.datasource.url=jdbc:postgresql://lagaltserver.postgres.database.azure.com:5432/LagaltDb?sslmode=require
+spring.datasource.username=postgres
+spring.datasource.password=lagalt!1
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+
+
+logging.level.org.springframework.jdbc.datasource=DEBUG
+
+server.port=8080

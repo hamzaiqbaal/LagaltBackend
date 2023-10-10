@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+
 @Table(name = "users")
 public class User {
 
@@ -35,4 +36,15 @@ public class User {
 
     @Column(name = "user_role")
     private String userRole;
+
+
+    public User(Long userId, String forName, String lastName, String description, String country, String email, String userRole) {
+        this.userId = userId;
+        this.forName = forName;
+        this.lastName = lastName;
+        this.description = description;
+        this.country = country;
+        this.email = email;
+        this.userRole = userRole;
+    }
 }
