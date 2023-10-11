@@ -6,7 +6,7 @@ RUN gradle bootJar
 FROM openjdk:17 as runtime
 WORKDIR /app
 ENV PORT 8080
-ENV SPRING_PROFILE production
+ENV SPRING_PROFILE "production"
 EXPOSE 8080
 ARG JAR_FILE=/app/build/libs/*.jar
 COPY --from=build ${JAR_FILE} /app/app.jar
