@@ -33,11 +33,5 @@ public class Project {
     @JsonBackReference
     private User owner;
 
-    @ManyToMany
-    @JoinTable(
-            name = "project_skill",
-            joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private Set<Skill> skills;
 }
 

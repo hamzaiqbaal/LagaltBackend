@@ -81,16 +81,5 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
     }
 
-    @Override
-    public List<ProjectDTO> getProjectsBySkill(Long skillId) {
-        List<Project> projects = projectRepository.findProjectsBySkillId(skillId);
-        return projects.stream()
-                .map(projectMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-
-
-
 }
 

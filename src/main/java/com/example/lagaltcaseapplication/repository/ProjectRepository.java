@@ -10,8 +10,5 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByOwner_UserId(Long userId);
 
-    @Query("select p from Project p join p.skills s where s.skillId = :skillId")
-    List<Project> findProjectsBySkillId(@Param("skillId") Long skillId);
-
 }
 

@@ -17,7 +17,6 @@ public interface ProjectService {
 
     void deleteProject(Long id);
 
-    List<ProjectDTO> getProjectsBySkill(Long skillId);
 
 
 

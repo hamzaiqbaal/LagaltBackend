@@ -43,10 +43,4 @@ public class User {
     @JsonManagedReference
     private List<Project> projects;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_skill",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private Set<Skill> skills;
 }

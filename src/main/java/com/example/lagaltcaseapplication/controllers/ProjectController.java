@@ -67,11 +67,12 @@ public class ProjectController {
         }
     }
 
+    /*
     @GetMapping("/projects/skill/{skillId}")
     public ResponseEntity<List<ProjectDTO>> getProjectsBySkill(@PathVariable Long skillId) {
         List<ProjectDTO> projects = projectService.getProjectsBySkill(skillId);
         return new ResponseEntity<>(projects, HttpStatus.OK);
-    }
+    }*/
 
 
 
