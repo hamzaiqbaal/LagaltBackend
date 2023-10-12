@@ -30,4 +30,28 @@ public class UserMapper {
         user.setUserRole(userDTO.getUserRole());
         return user;
     }
+
+    public static User updateEntity(User existingUser, UserDTO userDTO) {
+        if (userDTO.getForName() != null) {
+            existingUser.setForName(userDTO.getForName());
+        }
+        if (userDTO.getLastName() != null) {
+            existingUser.setLastName(userDTO.getLastName());
+        }
+        if (userDTO.getDescription() != null) {
+            existingUser.setDescription(userDTO.getDescription());
+        }
+        if (userDTO.getCountry() != null) {
+            existingUser.setCountry(userDTO.getCountry());
+        }
+        if (userDTO.getEmail() != null) {
+            existingUser.setEmail(userDTO.getEmail());
+        }
+        if (userDTO.getUserRole() != null) {
+            existingUser.setUserRole(userDTO.getUserRole());
+        }
+        return existingUser;
+    }
+
+
 }

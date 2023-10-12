@@ -28,6 +28,9 @@ public class Skill {
     @ManyToMany(mappedBy = "skills")
     private List<Project> projects;
 
+    @ManyToMany(mappedBy = "skills")
+    private List<User> users;
+
 }
 
 

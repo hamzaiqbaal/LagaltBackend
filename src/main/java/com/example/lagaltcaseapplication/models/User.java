@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -41,4 +42,11 @@ public class User {
     @OneToMany(mappedBy = "owner")
     @JsonManagedReference
     private List<Project> projects;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_skill",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private Set<Skill> skills;
 }
