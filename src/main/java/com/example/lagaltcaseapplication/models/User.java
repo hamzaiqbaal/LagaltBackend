@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.models;
 
 
+import com.example.lagaltcaseapplication.enums.Skills;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +43,10 @@ public class User {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Project> projects;
 
-
-
+    @ElementCollection(targetClass = Skills.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "skill")
+    private Set<Skills> skills;
 
 }

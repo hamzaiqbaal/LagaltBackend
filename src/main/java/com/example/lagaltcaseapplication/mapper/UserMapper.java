@@ -28,6 +28,7 @@ public class UserMapper {
                 .map(projectMapper::toDTO)
                 .collect(Collectors.toList()));
 
+        userDTO.setSkills(user.getSkills());
         return userDTO;
     }
 
@@ -40,6 +41,7 @@ public class UserMapper {
         user.setCountry(userDTO.getCountry());
         user.setEmail(userDTO.getEmail());
         user.setUserRole(userDTO.getUserRole());
+        user.setSkills(userDTO.getSkills());
         return user;
     }
 
@@ -62,6 +64,7 @@ public class UserMapper {
         if (userDTO.getUserRole() != null) {
             existingUser.setUserRole(userDTO.getUserRole());
         }
+
         return existingUser;
     }
 
