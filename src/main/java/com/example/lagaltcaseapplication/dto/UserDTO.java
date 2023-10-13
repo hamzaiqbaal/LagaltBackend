@@ -1,5 +1,10 @@
 package com.example.lagaltcaseapplication.dto;
 
+import com.example.lagaltcaseapplication.enums.Skills;
+
+import java.util.List;
+import java.util.Set;
+
 public class UserDTO {
 
     private Long userId;
@@ -9,6 +14,8 @@ public class UserDTO {
     private String country;
     private String email;
     private String userRole;
+    private List<ProjectDTO> projects;
+
 
     // Getter and Setter methods
     public Long getUserId() {
@@ -66,4 +73,22 @@ public class UserDTO {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+
+    public List<ProjectDTO> getProjects() {
+        return projects;
+    }
+    public void setProjects(List<ProjectDTO> projects) {
+        this.projects = projects;
+    }
+
+    private Set<Skills> skills;
+
+    public Set<Skills> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skills> skills) {
+        this.skills = skills;
+    }
+
 }
