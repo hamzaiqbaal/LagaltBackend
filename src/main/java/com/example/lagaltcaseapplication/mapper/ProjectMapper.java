@@ -24,6 +24,7 @@ public class ProjectMapper {
         projectDTO.setOwnerUserId(project.getOwner().getUserId());
         projectDTO.setIndustry(project.getIndustry());
         projectDTO.setSkillsRequired(project.getSkillsRequired());
+        projectDTO.setOwnerName(project.getOwner().getForName());
         return projectDTO;
     }
     public Project toEntity(ProjectDTO projectDTO) {

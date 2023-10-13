@@ -11,6 +11,7 @@ public class ProjectDTO {
     private String description;
     private String status;
     private Long ownerUserId;
+    private String ownerName;
 
     private Industry industry;
     private Set<Skills> skillsRequired;
@@ -69,6 +70,14 @@ public class ProjectDTO {
 
     public void setSkillsRequired(Set<Skills> skillsRequired) {
         this.skillsRequired = skillsRequired;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }
 
