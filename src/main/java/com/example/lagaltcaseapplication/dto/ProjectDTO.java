@@ -13,8 +13,8 @@ public class ProjectDTO {
     private Long ownerUserId;
     private String ownerName;
 
-    private Industry industry;
-    private Set<Skills> skillsRequired;
+    private String industry;
+    private Set<String> skillsRequired;
 
     public Long getProjectId() {
         return projectId;
@@ -56,19 +56,19 @@ public class ProjectDTO {
         this.ownerUserId = ownerUserId;
     }
 
-    public Industry getIndustry() {
+    public String getIndustry() {
         return industry;
     }
 
-    public void setIndustry(Industry industry) {
+    public void setIndustry(String industry) {
         this.industry = industry;
     }
 
-    public Set<Skills> getSkillsRequired() {
+    public Set<String> getSkillsRequired() {
         return skillsRequired;
     }
 
-    public void setSkillsRequired(Set<Skills> skillsRequired) {
+    public void setSkillsRequired(Set<String> skillsRequired) {
         this.skillsRequired = skillsRequired;
     }
 
