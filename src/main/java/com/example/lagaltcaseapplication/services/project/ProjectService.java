@@ -17,8 +17,4 @@ public interface ProjectService {
 
     void deleteProject(Long id);
 
-
-
-
-
 }

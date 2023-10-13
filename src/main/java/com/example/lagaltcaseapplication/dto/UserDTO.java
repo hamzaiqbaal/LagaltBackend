@@ -1,5 +1,7 @@
 package com.example.lagaltcaseapplication.dto;
 
+import java.util.List;
+
 public class UserDTO {
 
     private Long userId;
@@ -9,6 +11,8 @@ public class UserDTO {
     private String country;
     private String email;
     private String userRole;
+    private List<ProjectDTO> projects;
+
 
     // Getter and Setter methods
     public Long getUserId() {
@@ -65,5 +69,12 @@ public class UserDTO {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+    public List<ProjectDTO> getProjects() {
+        return projects;
+    }
+    public void setProjects(List<ProjectDTO> projects) {
+        this.projects = projects;
     }
 }

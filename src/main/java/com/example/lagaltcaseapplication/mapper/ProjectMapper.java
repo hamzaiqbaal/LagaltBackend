@@ -22,6 +22,8 @@ public class ProjectMapper {
         projectDTO.setDescription(project.getDescription());
         projectDTO.setStatus(project.getStatus());
         projectDTO.setOwnerUserId(project.getOwner().getUserId());
+        projectDTO.setIndustry(project.getIndustry());
+        projectDTO.setSkillsRequired(project.getSkillsRequired());
         return projectDTO;
     }
     public Project toEntity(ProjectDTO projectDTO) {
@@ -35,7 +37,8 @@ public class ProjectMapper {
         User owner = userRepository.findById(ownerUserId)
                 .orElseThrow(() -> new UserNotFoundException(ownerUserId));
         project.setOwner(owner);
-
+        project.setIndustry(projectDTO.getIndustry());
+        project.setSkillsRequired(projectDTO.getSkillsRequired());
         return project;
     }
 }

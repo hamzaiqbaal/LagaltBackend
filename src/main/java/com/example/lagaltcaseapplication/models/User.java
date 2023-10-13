@@ -39,8 +39,10 @@ public class User {
     @Column(name = "user_role")
     private String userRole;
 
-    @OneToMany(mappedBy = "owner")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Project> projects;
+
+
+
 
 }

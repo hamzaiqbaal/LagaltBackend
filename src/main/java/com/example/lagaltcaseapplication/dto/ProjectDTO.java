@@ -1,11 +1,19 @@
 package com.example.lagaltcaseapplication.dto;
 
+import com.example.lagaltcaseapplication.enums.Industry;
+import com.example.lagaltcaseapplication.enums.Skills;
+
+import java.util.Set;
+
 public class ProjectDTO {
     private Long projectId;
     private String title;
     private String description;
     private String status;
     private Long ownerUserId;
+
+    private Industry industry;
+    private Set<Skills> skillsRequired;
 
     public Long getProjectId() {
         return projectId;
@@ -45,6 +53,22 @@ public class ProjectDTO {
 
     public void setOwnerUserId(Long ownerUserId) {
         this.ownerUserId = ownerUserId;
+    }
+
+    public Industry getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Industry industry) {
+        this.industry = industry;
+    }
+
+    public Set<Skills> getSkillsRequired() {
+        return skillsRequired;
+    }
+
+    public void setSkillsRequired(Set<Skills> skillsRequired) {
+        this.skillsRequired = skillsRequired;
     }
 }
 

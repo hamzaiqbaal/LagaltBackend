@@ -1,5 +1,7 @@
 package com.example.lagaltcaseapplication.models;
 
+import com.example.lagaltcaseapplication.enums.Industry;
+import com.example.lagaltcaseapplication.enums.Skills;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -33,5 +35,14 @@ public class Project {
     @JsonBackReference
     private User owner;
 
+    @Enumerated(EnumType.STRING)
+    private Industry industry;
+
+
+    @ElementCollection(targetClass = Skills.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "project_skills_required", joinColumns = @JoinColumn(name = "project_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "skill")
+    private Set<Skills> skillsRequired;
 }
 

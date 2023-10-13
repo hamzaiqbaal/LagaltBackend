@@ -1,13 +1,21 @@
 package com.example.lagaltcaseapplication.mapper;
 
+import com.example.lagaltcaseapplication.dto.ProjectDTO;
 import com.example.lagaltcaseapplication.dto.UserDTO;
 import com.example.lagaltcaseapplication.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
 
-    public static UserDTO toDTO(User user) {
+    @Autowired
+    private ProjectMapper projectMapper;
+
+    public UserDTO toDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(user.getUserId());
         userDTO.setForName(user.getForName());
@@ -16,6 +24,10 @@ public class UserMapper {
         userDTO.setCountry(user.getCountry());
         userDTO.setEmail(user.getEmail());
         userDTO.setUserRole(user.getUserRole());
+        userDTO.setProjects(user.getProjects().stream()
+                .map(projectMapper::toDTO)
+                .collect(Collectors.toList()));
+
         return userDTO;
     }
 

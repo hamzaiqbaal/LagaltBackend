@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            return UserMapper.toDTO(user);
+            return userMapper.toDTO(user);
         } else {
             throw new UserNotFoundException(id);
         }
@@ -43,14 +43,11 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
 
-
-            User updatedUser = UserMapper.updateEntity(existingUser, updatedUserDTO);
-
+            User updatedUser = userMapper.updateEntity(existingUser, updatedUserDTO);
 
             updatedUser = userRepository.save(updatedUser);
 
-
-            return UserMapper.toDTO(updatedUser);
+            return userMapper.toDTO(updatedUser);
         } else {
             throw new UserNotFoundException(id);
         }
