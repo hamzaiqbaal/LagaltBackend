@@ -16,6 +16,10 @@ public class UserDTO {
     private String userRole;
     private List<ProjectDTO> projects;
 
+    private String username;
+    private String password;
+    private Integer age;
+
 
     // Getter and Setter methods
     public Long getUserId() {
@@ -89,6 +93,30 @@ public class UserDTO {
 
     public void setSkills(Set<Skills> skills) {
         this.skills = skills;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
 }

@@ -6,6 +6,7 @@ import com.example.lagaltcaseapplication.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,13 +21,20 @@ public class UserMapper {
         userDTO.setUserId(user.getUserId());
         userDTO.setForName(user.getForName());
         userDTO.setLastName(user.getLastName());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setAge(user.getAge());
         userDTO.setDescription(user.getDescription());
         userDTO.setCountry(user.getCountry());
         userDTO.setEmail(user.getEmail());
         userDTO.setUserRole(user.getUserRole());
-        userDTO.setProjects(user.getProjects().stream()
-                .map(projectMapper::toDTO)
-                .collect(Collectors.toList()));
+        if(user.getProjects() != null) {
+            userDTO.setProjects(user.getProjects().stream()
+                    .map(projectMapper::toDTO)
+                    .collect(Collectors.toList()));
+        } else {
+            userDTO.setProjects(new ArrayList<>());
+        }
 
         userDTO.setSkills(user.getSkills());
         return userDTO;
@@ -37,6 +45,9 @@ public class UserMapper {
         user.setUserId(userDTO.getUserId());
         user.setForName(userDTO.getForName());
         user.setLastName(userDTO.getLastName());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setAge(userDTO.getAge());
         user.setDescription(userDTO.getDescription());
         user.setCountry(userDTO.getCountry());
         user.setEmail(userDTO.getEmail());

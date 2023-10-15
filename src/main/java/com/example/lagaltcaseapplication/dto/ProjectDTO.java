@@ -3,6 +3,7 @@ package com.example.lagaltcaseapplication.dto;
 import com.example.lagaltcaseapplication.enums.Industry;
 import com.example.lagaltcaseapplication.enums.Skills;
 
+import java.util.List;
 import java.util.Set;
 
 public class ProjectDTO {
@@ -13,8 +14,13 @@ public class ProjectDTO {
     private Long ownerUserId;
     private String ownerName;
 
-    private String industry;
-    private Set<String> skillsRequired;
+    private String industryName;
+    private Set<String> skillsRequiredNames;
+
+    // New fields for POST using IDs
+    private Integer industryId;
+    private List<Integer> skillsRequiredIds;
+
 
     public Long getProjectId() {
         return projectId;
@@ -56,20 +62,36 @@ public class ProjectDTO {
         this.ownerUserId = ownerUserId;
     }
 
-    public String getIndustry() {
-        return industry;
+    public String getIndustryName() {
+        return industryName;
     }
 
-    public void setIndustry(String industry) {
-        this.industry = industry;
+    public void setIndustryName(String industryName) {
+        this.industryName = industryName;
     }
 
-    public Set<String> getSkillsRequired() {
-        return skillsRequired;
+    public Set<String> getSkillsRequiredNames() {
+        return skillsRequiredNames;
     }
 
-    public void setSkillsRequired(Set<String> skillsRequired) {
-        this.skillsRequired = skillsRequired;
+    public void setSkillsRequiredNames(Set<String> skillsRequiredNames) {
+        this.skillsRequiredNames = skillsRequiredNames;
+    }
+
+    public Integer getIndustryId() {
+        return industryId;
+    }
+
+    public void setIndustryId(Integer industryId) {
+        this.industryId = industryId;
+    }
+
+    public List<Integer> getSkillsRequiredIds() {
+        return skillsRequiredIds;
+    }
+
+    public void setSkillsRequiredIds(List<Integer> skillsRequiredIds) {
+        this.skillsRequiredIds = skillsRequiredIds;
     }
 
     public String getOwnerName() {

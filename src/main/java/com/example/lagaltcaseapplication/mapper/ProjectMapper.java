@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.example.lagaltcaseapplication.enums.Skills;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,53 +33,49 @@ import java.util.stream.Collectors;
             projectDTO.setOwnerUserId(project.getOwner().getUserId());
             projectDTO.setOwnerName(project.getOwner().getForName());
 
-
             // Handle null Industry
             if (project.getIndustry() != null) {
-                projectDTO.setIndustry(project.getIndustry().getName());
-            } else {
-                projectDTO.setIndustry(null);
+                projectDTO.setIndustryId(project.getIndustry().getId());
+                projectDTO.setIndustryName(project.getIndustry().getName());
             }
 
-            // Handle null Skills
             if (project.getSkillsRequired() != null) {
-                Set<String> skillsDisplayNames = project.getSkillsRequired().stream()
+                List<Integer> skillsIds = project.getSkillsRequired().stream()
+                        .map(Skills::getId)
+                        .collect(Collectors.toList());
+                List<String> skillsNames = project.getSkillsRequired().stream()
                         .map(Skills::getName)
-                        .collect(Collectors.toSet());
-                projectDTO.setSkillsRequired(skillsDisplayNames);
-            } else {
-                projectDTO.setSkillsRequired(null);
+                        .collect(Collectors.toList());
+                projectDTO.setSkillsRequiredIds(skillsIds);
+                projectDTO.setSkillsRequiredNames(new HashSet<>(skillsNames));
             }
 
             return projectDTO;
         }
-        public Project toEntity(ProjectDTO projectDTO) {
-            Project project = new Project();
-            project.setProjectId(projectDTO.getProjectId());
-            project.setTitle(projectDTO.getTitle());
-            project.setDescription(projectDTO.getDescription());
-            project.setStatus(projectDTO.getStatus());
-            Long ownerUserId = projectDTO.getOwnerUserId();
-            User owner = userRepository.findById(ownerUserId)
-                    .orElseThrow(() -> new UserNotFoundException(ownerUserId));
-            project.setOwner(owner);
 
+    public Project toEntity(ProjectDTO projectDTO) {
+        Project project = new Project();
+        project.setProjectId(projectDTO.getProjectId());
+        project.setTitle(projectDTO.getTitle());
+        project.setDescription(projectDTO.getDescription());
+        project.setStatus(projectDTO.getStatus());
+        Long ownerUserId = projectDTO.getOwnerUserId();
+        User owner = userRepository.findById(ownerUserId)
+                .orElseThrow(() -> new UserNotFoundException(ownerUserId));
+        project.setOwner(owner);
 
-            String industryFriendlyName = projectDTO.getIndustry();
-            Industry industryEnum = Arrays.stream(Industry.values())
-                    .filter(industry -> industry.getName().equals(industryFriendlyName))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid industry name"));
-            project.setIndustry(industryEnum);
+        // Handle industry
+        Integer industryId = projectDTO.getIndustryId();
+        Industry industryEnum = Industry.getById(industryId);
+        project.setIndustry(industryEnum);
 
+        List<Integer> skillsIds = projectDTO.getSkillsRequiredIds();
+        Set<Skills> skillsEnums = skillsIds.stream()
+                .map(Skills::getById)
+                .collect(Collectors.toSet());
+        project.setSkillsRequired(skillsEnums);
 
-
-            Set<Skills> skillsEnums = projectDTO.getSkillsRequired().stream()
-                    .map(skillString -> Skills.valueOf(skillString.toUpperCase()))
-                    .collect(Collectors.toSet());
-            project.setSkillsRequired(skillsEnums);
-
-            return project;
+        return project;
         }
     }
 

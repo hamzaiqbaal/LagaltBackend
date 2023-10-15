@@ -22,5 +22,14 @@ public enum Skills {
     public String getName() {
         return name;
     }
+
+    public static Skills getById(int id) {
+        for(Skills e : values()) {
+            if(e.id == id) return e;
+        }
+        throw new IllegalArgumentException("Invalid Skills ID");
     }
+
+
+}
 

@@ -8,6 +8,7 @@ import com.example.lagaltcaseapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
+        if (userDTO.getProjects() == null) {
+            userDTO.setProjects(new ArrayList<>());
+        }
         User user = userMapper.toEntity(userDTO);
         user = userRepository.save(user);
         return userMapper.toDTO(user);
