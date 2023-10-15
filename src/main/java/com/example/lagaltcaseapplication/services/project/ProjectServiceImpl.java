@@ -87,5 +87,14 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
     }
 
+
+    @Override
+    public List<ProjectDTO> getProjectsByIndustry(Industry industry) {
+        List<Project> projects = projectRepository.findByIndustry(industry);
+        return projects.stream()
+                .map(projectMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 }
 

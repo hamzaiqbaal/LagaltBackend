@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.services.project;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
+import com.example.lagaltcaseapplication.enums.Industry;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface ProjectService {
     ProjectDTO updateProject(Long id, ProjectDTO updatedProjectDTO);
 
     void deleteProject(Long id);
+
+    List<ProjectDTO> getProjectsByIndustry(Industry industry);
 
 }
