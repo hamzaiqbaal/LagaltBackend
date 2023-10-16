@@ -1,11 +1,15 @@
 package com.example.lagaltcaseapplication.services.project;
 
+import com.example.lagaltcaseapplication.dto.CommentDTO;
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
 import com.example.lagaltcaseapplication.enums.Industry;
 import com.example.lagaltcaseapplication.enums.Skills;
 import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
+import com.example.lagaltcaseapplication.mapper.CommentMapper;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
+import com.example.lagaltcaseapplication.models.Comment;
 import com.example.lagaltcaseapplication.models.Project;
+import com.example.lagaltcaseapplication.repository.CommentRepository;
 import com.example.lagaltcaseapplication.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private ProjectMapper projectMapper;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
 
 
@@ -95,6 +105,20 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(projectMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void addCommentToProject(Long projectId, CommentDTO commentDTO) {
+        Optional<Project> optionalProject = projectRepository.findById(projectId);
+        if (optionalProject.isPresent()) {
+            Project project = optionalProject.get();
+            Comment comment = commentMapper.toEntity(commentDTO);
+            comment.setProject(project);
+            commentRepository.save(comment);
+        } else {
+            throw new ProjectNotFoundException(projectId);
+        }
+    }
+
 
 }
 

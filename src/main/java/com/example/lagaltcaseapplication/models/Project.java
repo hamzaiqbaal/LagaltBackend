@@ -30,6 +30,9 @@ public class Project {
     @Column(name = "status")
     private String status;
 
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     @ManyToOne
     @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
     @JsonBackReference
