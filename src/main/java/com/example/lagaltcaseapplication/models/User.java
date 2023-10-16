@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.models;
 
 
+import com.example.lagaltcaseapplication.enums.Skills;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,14 +40,13 @@ public class User {
     @Column(name = "user_role")
     private String userRole;
 
-    @OneToMany(mappedBy = "owner")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Project> projects;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_skill",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private Set<Skill> skills;
+    @ElementCollection(targetClass = Skills.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "skill")
+    private Set<Skills> skills;
+
 }

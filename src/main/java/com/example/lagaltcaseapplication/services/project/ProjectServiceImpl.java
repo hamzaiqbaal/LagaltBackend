@@ -1,6 +1,8 @@
 package com.example.lagaltcaseapplication.services.project;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
+import com.example.lagaltcaseapplication.enums.Industry;
+import com.example.lagaltcaseapplication.enums.Skills;
 import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Project;
@@ -10,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.example.lagaltcaseapplication.enums.Industry.*;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -36,6 +41,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO createProject(ProjectDTO projectDTO) {
         Project project = projectMapper.toEntity(projectDTO);
+
+        project.setIndustry(WEBDEVELOPMENT);
+        project.setSkillsRequired(Set.of(Skills.JAVA, Skills.JAVASCRIPT));
+
         project = projectRepository.save(project);
         return projectMapper.toDTO(project);
     }
@@ -80,17 +89,6 @@ public class ProjectServiceImpl implements ProjectService {
         }
         projectRepository.deleteById(id);
     }
-
-    @Override
-    public List<ProjectDTO> getProjectsBySkill(Long skillId) {
-        List<Project> projects = projectRepository.findProjectsBySkillId(skillId);
-        return projects.stream()
-                .map(projectMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-
-
 
 }
 
