@@ -22,4 +22,13 @@ public enum Industry {
     public String getName() {
         return name;
     }
+
+    public static Industry getById(int id) {
+        for(Industry e : values()) {
+            if(e.id == id) return e;
+        }
+        throw new IllegalArgumentException("Invalid Industry ID");
     }
+
+
+}

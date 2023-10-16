@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.controllers;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
+import com.example.lagaltcaseapplication.enums.Industry;
 import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Project;
@@ -66,6 +67,21 @@ public class ProjectController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/projects/industry/{industry}")
+    public ResponseEntity<List<ProjectDTO>> getProjectsByIndustry(@PathVariable String industry) {
+        try {
+            Industry enumIndustry = Industry.valueOf(industry.toUpperCase());
+            List<ProjectDTO> projectDTOs = projectService.getProjectsByIndustry(enumIndustry);
+            if (projectDTOs.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(projectDTOs, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }
 

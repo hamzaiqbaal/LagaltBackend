@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,8 +41,17 @@ public class User {
     @Column(name = "user_role")
     private String userRole;
 
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "age")
+    private Integer age;
+
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     @ElementCollection(targetClass = Skills.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

@@ -42,9 +42,6 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDTO createProject(ProjectDTO projectDTO) {
         Project project = projectMapper.toEntity(projectDTO);
 
-        project.setIndustry(WEBDEVELOPMENT);
-        project.setSkillsRequired(Set.of(Skills.JAVA, Skills.JAVASCRIPT));
-
         project = projectRepository.save(project);
         return projectMapper.toDTO(project);
     }
@@ -88,6 +85,15 @@ public class ProjectServiceImpl implements ProjectService {
             throw new ProjectNotFoundException(id);
         }
         projectRepository.deleteById(id);
+    }
+
+
+    @Override
+    public List<ProjectDTO> getProjectsByIndustry(Industry industry) {
+        List<Project> projects = projectRepository.findByIndustry(industry);
+        return projects.stream()
+                .map(projectMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
 }
