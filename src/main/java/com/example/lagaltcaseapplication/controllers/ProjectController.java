@@ -45,7 +45,7 @@ public class ProjectController {
         return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/ae")
     public ResponseEntity<List<ProjectDTO>> getAllProjects() {
         List<ProjectDTO> allProjects = projectService.getAllProjects();
         return new ResponseEntity<>(allProjects, HttpStatus.OK);
