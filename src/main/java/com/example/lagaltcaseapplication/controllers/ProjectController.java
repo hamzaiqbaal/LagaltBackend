@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/projects")
@@ -86,23 +87,32 @@ public class ProjectController {
     }
 
     @GetMapping("/skills")
-    public ResponseEntity<List<String>> getAllSkills() {
-        List<String> skills = Arrays.stream(Skills.values())
-                .map(Skills::name)
+    public ResponseEntity<List<Object>> getAllSkills() {
+        List<Object> skills = Stream.of(Skills.values())
+                .map(skill -> {
+                    return new Object() {
+                        public final String name = skill.name();
+                        public final int id = skill.ordinal();
+                    };
+                })
                 .collect(Collectors.toList());
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
 
     @GetMapping("/industries")
-    public ResponseEntity<List<String>> getAllIndustries() {
-        List<String> industries = Arrays.stream(Industry.values())
-                .map(Industry::name)
+    public ResponseEntity<List<Object>> getAllIndustries() {
+        List<Object> industries = Stream.of(Industry.values())
+                .map(industry -> {
+                    return new Object() {
+                        public final String name = industry.name();
+                        public final int id = industry.ordinal();
+                    };
+                })
                 .collect(Collectors.toList());
         return new ResponseEntity<>(industries, HttpStatus.OK);
     }
-
-
 }
+
 
 
 
