@@ -53,6 +53,9 @@ public class User {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Project> projects = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "participants")
+    private List<Project> participatingProjects;
+
     @ElementCollection(targetClass = Skills.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))

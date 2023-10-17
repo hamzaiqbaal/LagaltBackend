@@ -14,6 +14,9 @@ public class UserDTO {
     private String country;
     private String email;
     private String userRole;
+
+    private boolean includeProjects;
+
     private List<ProjectDTO> projects;
 
     private String username;
@@ -22,6 +25,18 @@ public class UserDTO {
 
 
     // Getter and Setter methods
+
+    public boolean isIncludeProjects() {
+        return includeProjects;
+    }
+
+    public void setIncludeProjects(boolean includeProjects) {
+        this.includeProjects = includeProjects;
+    }
+
+
+
+
     public Long getUserId() {
         return userId;
     }

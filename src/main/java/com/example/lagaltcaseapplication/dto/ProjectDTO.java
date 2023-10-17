@@ -14,6 +14,8 @@ public class ProjectDTO {
     private Long ownerUserId;
     private String ownerName;
 
+    private List<UserDTO> participants;
+
     private String industryName;
     private Set<String> skillsRequiredNames;
 
@@ -21,6 +23,13 @@ public class ProjectDTO {
     private Integer industryId;
     private List<Integer> skillsRequiredIds;
 
+    public List<UserDTO> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<UserDTO> participants) {
+        this.participants = participants;
+    }
 
     public Long getProjectId() {
         return projectId;

@@ -28,11 +28,11 @@ public class UserMapper {
         userDTO.setCountry(user.getCountry());
         userDTO.setEmail(user.getEmail());
         userDTO.setUserRole(user.getUserRole());
-        if(user.getProjects() != null) {
+        if (userDTO.isIncludeProjects()) {
             userDTO.setProjects(user.getProjects().stream()
-                    .map(projectMapper::toDTO)
+                    .map(projectMapper::toDTO) // this call will now omit nested participants
                     .collect(Collectors.toList()));
-        } else {
+        }else {
             userDTO.setProjects(new ArrayList<>());
         }
 
@@ -77,6 +77,15 @@ public class UserMapper {
         }
 
         return existingUser;
+    }
+
+    public UserDTO toSimplifiedDTO(User user) {
+        UserDTO simplifiedUserDTO = new UserDTO();
+        simplifiedUserDTO.setUserId(user.getUserId());
+        simplifiedUserDTO.setForName(user.getForName());
+        simplifiedUserDTO.setLastName(user.getLastName());
+        simplifiedUserDTO.setUserRole(user.getUserRole());
+        return simplifiedUserDTO;
     }
 
 

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +41,13 @@ public class Project {
 
     @Enumerated(EnumType.STRING)
     private Industry industry;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "project_participants",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> participants = new ArrayList<>();
 
 
     @ElementCollection(targetClass = Skills.class, fetch = FetchType.EAGER)

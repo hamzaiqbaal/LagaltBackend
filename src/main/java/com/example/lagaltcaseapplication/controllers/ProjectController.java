@@ -111,6 +111,13 @@ public class ProjectController {
         return new ResponseEntity<>(industries, HttpStatus.OK);
     }
 
+    @PostMapping("/{projectId}/addParticipant/{userId}")
+    public ResponseEntity<Void> addParticipant(@PathVariable Long projectId, @PathVariable Long userId) {
+        projectService.addParticipantToProject(projectId, userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
 
 

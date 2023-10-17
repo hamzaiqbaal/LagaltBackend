@@ -24,4 +24,6 @@ public interface ProjectService {
 
     void addCommentToProject(Long projectId, CommentDTO commentDTO);
 
+    void addParticipantToProject(Long projectId, Long userId);
+
 }

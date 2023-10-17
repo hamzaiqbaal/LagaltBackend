@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.mapper;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
+import com.example.lagaltcaseapplication.dto.UserDTO;
 import com.example.lagaltcaseapplication.enums.Industry;
 import com.example.lagaltcaseapplication.exceptions.UserNotFoundException;
 import com.example.lagaltcaseapplication.models.Project;
@@ -24,7 +25,11 @@ import java.util.stream.Collectors;
         @Autowired
         private UserRepository userRepository;
 
-        public ProjectDTO toDTO(Project project) {
+
+        @Autowired
+        private UserMapper userMapper;
+
+    public ProjectDTO toDTO(Project project) {
             ProjectDTO projectDTO = new ProjectDTO();
             projectDTO.setProjectId(project.getProjectId());
             projectDTO.setTitle(project.getTitle());
@@ -32,6 +37,11 @@ import java.util.stream.Collectors;
             projectDTO.setStatus(project.getStatus());
             projectDTO.setOwnerUserId(project.getOwner().getUserId());
             projectDTO.setOwnerName(project.getOwner().getForName());
+
+            List<UserDTO> participants = project.getParticipants().stream()
+                    .map(userMapper::toSimplifiedDTO)  // Assuming you have added the toSimplifiedDTO method in UserMapper
+                    .collect(Collectors.toList());
+            projectDTO.setParticipants(participants);
 
             // Handle null Industry
             if (project.getIndustry() != null) {

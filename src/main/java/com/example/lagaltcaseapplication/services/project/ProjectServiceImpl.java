@@ -9,8 +9,10 @@ import com.example.lagaltcaseapplication.mapper.CommentMapper;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Comment;
 import com.example.lagaltcaseapplication.models.Project;
+import com.example.lagaltcaseapplication.models.User;
 import com.example.lagaltcaseapplication.repository.CommentRepository;
 import com.example.lagaltcaseapplication.repository.ProjectRepository;
+import com.example.lagaltcaseapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private CommentMapper commentMapper;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
 
@@ -119,6 +124,18 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
+    public void addParticipantToProject(Long projectId, Long userId) {
+        Optional<Project> optionalProject = projectRepository.findById(projectId);
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalProject.isPresent() && optionalUser.isPresent()) {
+            Project project = optionalProject.get();
+            User user = optionalUser.get();
+            project.getParticipants().add(user);
+            projectRepository.save(project);
+        } else {
+            // Handle not found situations
+        }
 
+    }
 }
 
