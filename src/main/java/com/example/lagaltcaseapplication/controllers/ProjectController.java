@@ -2,6 +2,7 @@ package com.example.lagaltcaseapplication.controllers;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
 import com.example.lagaltcaseapplication.enums.Industry;
+import com.example.lagaltcaseapplication.enums.Skills;
 import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Project;
@@ -12,8 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/projects")
@@ -80,6 +83,22 @@ public class ProjectController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/skills")
+    public ResponseEntity<List<String>> getAllSkills() {
+        List<String> skills = Arrays.stream(Skills.values())
+                .map(Skills::name)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(skills, HttpStatus.OK);
+    }
+
+    @GetMapping("/industries")
+    public ResponseEntity<List<String>> getAllIndustries() {
+        List<String> industries = Arrays.stream(Industry.values())
+                .map(Industry::name)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(industries, HttpStatus.OK);
     }
 
 
