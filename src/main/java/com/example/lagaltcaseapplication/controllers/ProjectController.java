@@ -13,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -87,30 +85,32 @@ public class ProjectController {
     }
 
     @GetMapping("/skills")
-    public ResponseEntity<List<Object>> getAllSkills() {
-        List<Object> skills = Stream.of(Skills.values())
+    public ResponseEntity<List<Map<String, Object>>> getAllSkills() {
+        List<Map<String, Object>> skills = Stream.of(Skills.values())
                 .map(skill -> {
-                    return new Object() {
-                        public final String name = skill.name();
-                        public final int id = skill.ordinal();
-                    };
+                    Map<String, Object> skillMap = new HashMap<>();
+                    skillMap.put("id", skill.getId());
+                    skillMap.put("name", skill.getName());
+                    return skillMap;
                 })
                 .collect(Collectors.toList());
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
 
+
     @GetMapping("/industries")
-    public ResponseEntity<List<Object>> getAllIndustries() {
-        List<Object> industries = Stream.of(Industry.values())
+    public ResponseEntity<List<Map<String, Object>>> getAllIndustries() {
+        List<Map<String, Object>> industries = Stream.of(Industry.values())
                 .map(industry -> {
-                    return new Object() {
-                        public final String name = industry.name();
-                        public final int id = industry.ordinal();
-                    };
+                    Map<String, Object> industryMap = new HashMap<>();
+                    industryMap.put("id", industry.getId());
+                    industryMap.put("name", industry.getName());
+                    return industryMap;
                 })
                 .collect(Collectors.toList());
         return new ResponseEntity<>(industries, HttpStatus.OK);
     }
+
 }
 
 
