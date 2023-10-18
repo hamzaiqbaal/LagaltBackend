@@ -33,15 +33,6 @@ public class CommentController {
         return new ResponseEntity<>(commentDTOs, HttpStatus.OK);
     }
 
-    @GetMapping("/projects/{projectId}/comments")
-    public ResponseEntity<List<CommentDTO>> getCommentsByProjectId(@PathVariable Long projectId) {
-        List<Comment> comments = commentService.getCommentsByProject(projectId);
-        List<CommentDTO> commentDTOs = comments.stream()
-                .map(commentMapper::toDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(commentDTOs, HttpStatus.OK);
-    }
-
     @ApiOperation(value = "Add a comment to a project")
     @PostMapping("/project/{projectId}")
     public ResponseEntity<CommentDTO> addCommentToProject(@PathVariable Long projectId, @RequestBody CommentDTO commentDTO) {

@@ -18,8 +18,11 @@ public class CommentMapper {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
-        commentDTO.setProjectId(comment.getProject().getProjectId());
+        if(comment.getProject() != null) {  // Null check here
+            commentDTO.setProjectId(comment.getProject().getProjectId());
+        }
         return commentDTO;
     }
+
 }
 

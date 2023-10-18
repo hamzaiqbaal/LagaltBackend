@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
         if (optionalProject.isPresent()) {
             Project project = optionalProject.get();
             Comment comment = commentMapper.toEntity(commentDTO);
-            comment.setProject(project);
+            comment.setProject(project);  // setting project here
             commentRepository.save(comment);
         } else {
             throw new ProjectNotFoundException(projectId);
