@@ -2,6 +2,7 @@ package com.example.lagaltcaseapplication.dto;
 
 public class CommentDTO {
     private Long id;
+
     private String content;
     private Long projectId;
 

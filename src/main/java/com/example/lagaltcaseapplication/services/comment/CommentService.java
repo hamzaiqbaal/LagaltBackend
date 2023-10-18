@@ -9,6 +9,8 @@ public interface CommentService {
 
     List<Comment> getCommentsByProject(Long projectId);
 
-    void addCommentToProject(Long projectId, CommentDTO commentDTO);
+    Comment addCommentToProject(Long projectId, CommentDTO commentDTO);
+
+    void deleteComment(Long commentId);
 
 }

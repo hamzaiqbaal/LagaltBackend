@@ -1,6 +1,7 @@
 package com.example.lagaltcaseapplication.services.comment;
 
 import com.example.lagaltcaseapplication.dto.CommentDTO;
+import com.example.lagaltcaseapplication.exceptions.CommentNotFoundException;
 import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
 import com.example.lagaltcaseapplication.mapper.CommentMapper;
 import com.example.lagaltcaseapplication.models.Comment;
@@ -30,16 +31,27 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void addCommentToProject(Long projectId, CommentDTO commentDTO) {
+    public Comment addCommentToProject(Long projectId, CommentDTO commentDTO) {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
         if (optionalProject.isPresent()) {
             Project project = optionalProject.get();
             Comment comment = commentMapper.toEntity(commentDTO);
-            comment.setProject(project);  // setting project here
-            commentRepository.save(comment);
+            comment.setProject(project);
+            return commentRepository.save(comment);  // Save and return the comment
         } else {
             throw new ProjectNotFoundException(projectId);
         }
     }
+
+
+    @Override
+    public void deleteComment(Long commentId) {
+        if (commentRepository.existsById(commentId)) {
+            commentRepository.deleteById(commentId);
+        } else {
+            throw new CommentNotFoundException(commentId);
+        }
+    }
+
 
 }
