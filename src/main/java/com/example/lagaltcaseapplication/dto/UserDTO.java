@@ -1,10 +1,12 @@
 package com.example.lagaltcaseapplication.dto;
 
 import com.example.lagaltcaseapplication.enums.Skills;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 import java.util.Set;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
     private Long userId;

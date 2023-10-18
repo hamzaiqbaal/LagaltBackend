@@ -5,6 +5,7 @@ import com.example.lagaltcaseapplication.dto.ProjectDTO;
 import com.example.lagaltcaseapplication.enums.Industry;
 import com.example.lagaltcaseapplication.enums.Skills;
 import com.example.lagaltcaseapplication.exceptions.ProjectNotFoundException;
+import com.example.lagaltcaseapplication.exceptions.ResourceNotFoundException;
 import com.example.lagaltcaseapplication.mapper.CommentMapper;
 import com.example.lagaltcaseapplication.mapper.ProjectMapper;
 import com.example.lagaltcaseapplication.models.Comment;
@@ -136,6 +137,25 @@ public class ProjectServiceImpl implements ProjectService {
             // Handle not found situations
         }
 
+    }
+
+    public void removeParticipant(Long projectId, Long userId) {
+        Optional<Project> projectOptional = projectRepository.findById(projectId);
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if (projectOptional.isPresent() && userOptional.isPresent()) {
+            Project project = projectOptional.get();
+            User user = userOptional.get();
+            project.getParticipants().remove(user);
+            projectRepository.save(project);
+        } else {
+            if (!projectOptional.isPresent()) {
+                throw new ResourceNotFoundException("Project", "id", projectId);
+            }
+            if (!userOptional.isPresent()) {
+                throw new ResourceNotFoundException("User", "id", userId);
+            }
+        }
     }
 }
 

@@ -117,6 +117,13 @@ public class ProjectController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/projects/{projectId}/participants/{userId}")
+    public ResponseEntity<Void> removeParticipant(@PathVariable Long projectId, @PathVariable Long userId) {
+        // Call service method to remove the participant
+        projectService.removeParticipant(projectId, userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
 

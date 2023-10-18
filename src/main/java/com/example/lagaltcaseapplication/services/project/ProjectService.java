@@ -26,4 +26,6 @@ public interface ProjectService {
 
     void addParticipantToProject(Long projectId, Long userId);
 
+    void removeParticipant(Long projectId, Long userId);
+
 }
