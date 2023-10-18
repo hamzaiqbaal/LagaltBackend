@@ -90,6 +90,12 @@ public class ProjectServiceImpl implements ProjectService {
         existingProject.setTitle(updatedProjectDTO.getTitle());
         existingProject.setDescription(updatedProjectDTO.getDescription());
         existingProject.setStatus(updatedProjectDTO.getStatus());
+        existingProject.setIndustry(Industry.getById(updatedProjectDTO.getIndustryId())); // Assume you have getById in Industry enum
+        existingProject.setSkillsRequired(
+                updatedProjectDTO.getSkillsRequiredIds().stream()
+                        .map(Skills::getById)
+                        .collect(Collectors.toSet())
+        );
 
         Project updatedProject = projectRepository.save(existingProject);
         return projectMapper.toDTO(updatedProject);
