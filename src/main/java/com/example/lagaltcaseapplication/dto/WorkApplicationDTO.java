@@ -4,6 +4,8 @@ public class WorkApplicationDTO {
 
     private Long applicationId;
 
+    private String forName;
+
     private Long projectId;
 
     private Long userId;
@@ -50,6 +52,14 @@ public class WorkApplicationDTO {
 
     public void setMotivation(String motivation) {
         this.motivation = motivation;
+    }
+
+    public String getForName() {
+        return forName;
+    }
+
+    public void setForName(String forName) {
+        this.forName = forName;
     }
 }
 

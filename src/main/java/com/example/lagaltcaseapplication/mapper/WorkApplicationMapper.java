@@ -53,6 +53,8 @@ public class WorkApplicationMapper {
         workApplicationDTO.setAccepted(workApplication.isAccepted());
         workApplicationDTO.setMotivation(workApplication.getMotivation());
 
+        workApplicationDTO.setForName(workApplication.getUser().getForName());
+
         return workApplicationDTO;
     }
 }

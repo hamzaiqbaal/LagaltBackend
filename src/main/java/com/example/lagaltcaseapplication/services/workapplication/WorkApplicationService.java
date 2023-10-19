@@ -8,5 +8,8 @@ public interface WorkApplicationService {
 
     List<WorkApplicationDTO> getAllApplications();
 
+    WorkApplicationDTO createWorkApplication(WorkApplicationDTO workApplicationDTO);
+
+    void acceptApplication(Long applicationId);
 
 }

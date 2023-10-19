@@ -2,6 +2,7 @@ package com.example.lagaltcaseapplication.mapper;
 
 import com.example.lagaltcaseapplication.dto.ProjectDTO;
 import com.example.lagaltcaseapplication.dto.UserDTO;
+import com.example.lagaltcaseapplication.dto.WorkApplicationDTO;
 import com.example.lagaltcaseapplication.enums.Industry;
 import com.example.lagaltcaseapplication.exceptions.UserNotFoundException;
 import com.example.lagaltcaseapplication.models.Project;
@@ -28,6 +29,10 @@ import java.util.stream.Collectors;
 
         @Autowired
         private UserMapper userMapper;
+
+        @Autowired
+        private WorkApplicationMapper workApplicationMapper;
+
 
     public ProjectDTO toDTO(Project project) {
             ProjectDTO projectDTO = new ProjectDTO();
@@ -59,6 +64,12 @@ import java.util.stream.Collectors;
                 projectDTO.setSkillsRequiredIds(skillsIds);
                 projectDTO.setSkillsRequiredNames(new HashSet<>(skillsNames));
             }
+
+            List<WorkApplicationDTO> workApplicationDTOs = project.getWorkApplications().stream()
+                    .map(workApplicationMapper::toDTO)
+                    .collect(Collectors.toList());
+
+            projectDTO.setWorkApplications(workApplicationDTOs);
 
             return projectDTO;
         }

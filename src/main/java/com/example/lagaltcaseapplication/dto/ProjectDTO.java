@@ -23,6 +23,21 @@ public class ProjectDTO {
     private Integer industryId;
     private List<Integer> skillsRequiredIds;
 
+    private List<WorkApplicationDTO> workApplications;
+
+
+
+
+    //GETTER AND SETTER
+
+    public List<WorkApplicationDTO> getWorkApplications() {
+        return workApplications;
+    }
+
+    public void setWorkApplications(List<WorkApplicationDTO> workApplications) {
+        this.workApplications = workApplications;
+    }
+
     public List<UserDTO> getParticipants() {
         return participants;
     }

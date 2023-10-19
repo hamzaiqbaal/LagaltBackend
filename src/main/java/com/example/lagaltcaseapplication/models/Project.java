@@ -34,6 +34,11 @@ public class Project {
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+    private List<WorkApplication> workApplications;
+
+
     @ManyToOne
     @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
     @JsonBackReference
