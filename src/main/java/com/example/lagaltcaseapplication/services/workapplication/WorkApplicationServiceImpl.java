@@ -40,20 +40,21 @@ public class WorkApplicationServiceImpl implements WorkApplicationService {
 
 
     public void acceptApplication(Long applicationId) {
-        // Fetch the work application
         WorkApplication workApplication = workApplicationRepository.findById(applicationId)
                 .orElseThrow(() -> new IllegalArgumentException("Application not found"));
 
-        // Mark the application as accepted
         workApplication.setAccepted(true);
-        workApplicationRepository.save(workApplication);
 
-        // Fetch the related project
         Project project = workApplication.getProject();
 
-        // Add the user to the project's participant list
         project.getParticipants().add(workApplication.getUser());
+
+        project.getWorkApplications().remove(workApplication);
+
         projectRepository.save(project);
+
+        workApplicationRepository.delete(workApplication);
     }
+
 
 }
