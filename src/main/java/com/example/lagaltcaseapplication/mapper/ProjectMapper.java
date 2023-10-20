@@ -13,10 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.lagaltcaseapplication.enums.Skills;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -65,11 +62,14 @@ import java.util.stream.Collectors;
                 projectDTO.setSkillsRequiredNames(new HashSet<>(skillsNames));
             }
 
-            List<WorkApplicationDTO> workApplicationDTOs = project.getWorkApplications().stream()
-                    .map(workApplicationMapper::toDTO)
-                    .collect(Collectors.toList());
+        List<WorkApplicationDTO> workApplicationDTOs = Optional.ofNullable(project.getWorkApplications())
+                .orElseGet(Collections::emptyList)
+                .stream()
+                .map(workApplicationMapper::toDTO)
+                .collect(Collectors.toList());
 
-            projectDTO.setWorkApplications(workApplicationDTOs);
+        projectDTO.setWorkApplications(workApplicationDTOs);
+
 
             return projectDTO;
         }
