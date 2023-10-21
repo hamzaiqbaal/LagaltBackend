@@ -105,6 +105,16 @@ public enum Skills {
         throw new IllegalArgumentException("Invalid Skills ID");
     }
 
+    public static Skills getByName(String name) {
+        for (Skills skill : values()) {
+            if (skill.getName().equals(name)) {
+                return skill;
+            }
+        }
+        throw new IllegalArgumentException("Invalid skill name");
+    }
+
+
 
 }
 

@@ -6,8 +6,12 @@ import com.example.lagaltcaseapplication.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.lagaltcaseapplication.enums.Skills;
+
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,7 +40,12 @@ public class UserMapper {
             userDTO.setProjects(new ArrayList<>());
         }
 
-        userDTO.setSkills(user.getSkills());
+        if (user.getSkills() != null) {
+            List<String> skillNames = user.getSkills().stream()
+                    .map(Skills::getName)
+                    .collect(Collectors.toList());
+            userDTO.setSkillNames(skillNames);
+        }
         return userDTO;
     }
 
@@ -52,7 +61,13 @@ public class UserMapper {
         user.setCountry(userDTO.getCountry());
         user.setEmail(userDTO.getEmail());
         user.setUserRole(userDTO.getUserRole());
-        user.setSkills(userDTO.getSkills());
+
+        if (userDTO.getSkillNames() != null) {
+            Set<Skills> skills = userDTO.getSkillNames().stream()
+                    .map(Skills::getByName)
+                    .collect(Collectors.toSet());
+            user.setSkills(skills);
+        }
         return user;
     }
 

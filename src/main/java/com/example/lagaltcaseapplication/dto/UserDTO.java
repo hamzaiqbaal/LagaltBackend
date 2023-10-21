@@ -25,8 +25,18 @@ public class UserDTO {
     private String password;
     private Integer age;
 
+    private List<String> skillNames;
+
 
     // Getter and Setter methods
+
+    public List<String> getSkillNames() {
+        return skillNames;
+    }
+
+    public void setSkillNames(List<String> skillNames) {
+        this.skillNames = skillNames;
+    }
 
     public boolean isIncludeProjects() {
         return includeProjects;
@@ -35,8 +45,6 @@ public class UserDTO {
     public void setIncludeProjects(boolean includeProjects) {
         this.includeProjects = includeProjects;
     }
-
-
 
 
     public Long getUserId() {
@@ -100,16 +108,6 @@ public class UserDTO {
     }
     public void setProjects(List<ProjectDTO> projects) {
         this.projects = projects;
-    }
-
-    private Set<Skills> skills;
-
-    public Set<Skills> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<Skills> skills) {
-        this.skills = skills;
     }
 
     public String getUsername() {
