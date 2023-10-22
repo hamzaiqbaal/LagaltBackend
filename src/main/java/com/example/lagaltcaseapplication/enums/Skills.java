@@ -114,7 +114,5 @@ public enum Skills {
         throw new IllegalArgumentException("Invalid skill name");
     }
 
-
-
 }
 

@@ -2,6 +2,7 @@ package com.example.lagaltcaseapplication.dto;
 
 import com.example.lagaltcaseapplication.enums.Skills;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 public class UserDTO {
 
     private Long userId;
+    private boolean isProfileVisible;
     private String forName;
     private String lastName;
     private String description;
@@ -17,6 +19,7 @@ public class UserDTO {
     private String email;
     private String userRole;
 
+    @Getter
     private boolean includeProjects;
 
     private List<ProjectDTO> projects;
@@ -25,10 +28,31 @@ public class UserDTO {
     private String password;
     private Integer age;
 
-    private List<String> skillNames;
+    private List<Integer> skillIds; // To hold the skill IDs
+    private List<String> skillNames; // To hold the skill names
 
 
-    // Getter and Setter methods
+
+    //GETTER AND SETTERS
+
+    public boolean isProfileVisible() {
+        return isProfileVisible;
+    }
+
+    public void setProfileVisible(boolean isProfileVisible) {
+        this.isProfileVisible = isProfileVisible;
+    }
+
+
+    public List<Integer> getSkillIds() {
+        return skillIds;
+    }
+
+
+    public void setSkillIds(List<Integer> skillIds) {
+        this.skillIds = skillIds;
+    }
+
 
     public List<String> getSkillNames() {
         return skillNames;
@@ -36,10 +60,6 @@ public class UserDTO {
 
     public void setSkillNames(List<String> skillNames) {
         this.skillNames = skillNames;
-    }
-
-    public boolean isIncludeProjects() {
-        return includeProjects;
     }
 
     public void setIncludeProjects(boolean includeProjects) {

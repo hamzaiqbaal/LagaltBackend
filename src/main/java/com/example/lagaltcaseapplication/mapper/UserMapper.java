@@ -10,6 +10,7 @@ import com.example.lagaltcaseapplication.enums.Skills;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,11 +42,20 @@ public class UserMapper {
         }
 
         if (user.getSkills() != null) {
+            List<Integer> skillIds = user.getSkills().stream()
+                    .map(Skills::getId)
+                    .collect(Collectors.toList());
+            userDTO.setSkillIds(skillIds);
+
             List<String> skillNames = user.getSkills().stream()
                     .map(Skills::getName)
                     .collect(Collectors.toList());
             userDTO.setSkillNames(skillNames);
         }
+
+        userDTO.setProfileVisible(user.isProfileVisible());
+
+
         return userDTO;
     }
 
@@ -62,12 +72,15 @@ public class UserMapper {
         user.setEmail(userDTO.getEmail());
         user.setUserRole(userDTO.getUserRole());
 
-        if (userDTO.getSkillNames() != null) {
-            Set<Skills> skills = userDTO.getSkillNames().stream()
-                    .map(Skills::getByName)
+        if (userDTO.getSkillIds() != null) {
+            Set<Skills> skills = userDTO.getSkillIds().stream()
+                    .map(Skills::getById)
                     .collect(Collectors.toSet());
             user.setSkills(skills);
         }
+
+        user.setProfileVisible(userDTO.isProfileVisible());
+
         return user;
     }
 

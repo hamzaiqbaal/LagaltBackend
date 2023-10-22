@@ -23,6 +23,10 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "is_profile_visible", nullable = false)
+    private boolean isProfileVisible = true;
+
+
     @Column(name = "for_name")
     private String forName;
 
