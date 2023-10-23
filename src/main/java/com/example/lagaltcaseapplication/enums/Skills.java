@@ -82,6 +82,7 @@ public enum Skills {
     VIDEOPAD(74, "VideoPad"),
     KINEMASTER(75, "KineMaster");
 
+
     private final int id;
     private final String name;
 
