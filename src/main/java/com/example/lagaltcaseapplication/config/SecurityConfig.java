@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-    @Bean
+  /*  @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().sessionManagement().disable()
                 .csrf().disable()
@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .jwtAuthenticationConverter(jwtAuthenticationConverter());
         return http.build();
     }
+
+   */
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
