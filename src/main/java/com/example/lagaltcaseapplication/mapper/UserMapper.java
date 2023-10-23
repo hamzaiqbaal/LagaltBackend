@@ -72,8 +72,11 @@ public class UserMapper {
         user.setEmail(userDTO.getEmail());
         user.setUserRole(userDTO.getUserRole());
 
-        if (userDTO.getSkillIds() != null) {
+        if (userDTO.getSkillIds() == null || userDTO.getSkillIds().isEmpty()) {
+            user.setSkills(new HashSet<>());
+        } else {
             Set<Skills> skills = userDTO.getSkillIds().stream()
+                    .filter(id -> id > 0)
                     .map(Skills::getById)
                     .collect(Collectors.toSet());
             user.setSkills(skills);

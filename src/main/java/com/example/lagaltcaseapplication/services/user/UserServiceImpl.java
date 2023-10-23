@@ -62,6 +62,10 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getProjects() == null) {
             userDTO.setProjects(new ArrayList<>());
         }
+        if (userDTO.getSkillIds() == null) {
+            userDTO.setSkillIds(new ArrayList<>());
+        }
+
         User user = userMapper.toEntity(userDTO);
         user = userRepository.save(user);
         return userMapper.toDTO(user);
