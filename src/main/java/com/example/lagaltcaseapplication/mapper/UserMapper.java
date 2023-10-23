@@ -106,6 +106,25 @@ public class UserMapper {
         if (userDTO.getUserRole() != null) {
             existingUser.setUserRole(userDTO.getUserRole());
         }
+        if (userDTO.getAge() != null) {
+            existingUser.setAge(userDTO.getAge());
+        }
+        if (userDTO.getUsername() != null) {
+            existingUser.setUsername(userDTO.getUsername());
+        }
+        if (userDTO.getPassword() != null) {
+            existingUser.setPassword(userDTO.getPassword());
+        }
+        if (userDTO.getSkillIds() == null || userDTO.getSkillIds().isEmpty()) {
+            existingUser.setSkills(new HashSet<>());
+        } else {
+            Set<Skills> skills = userDTO.getSkillIds().stream()
+                    .filter(id -> id > 0)
+                    .map(Skills::getById)
+                    .collect(Collectors.toSet());
+            existingUser.setSkills(skills);
+        }
+        existingUser.setProfileVisible(userDTO.isProfileVisible());
 
         return existingUser;
     }

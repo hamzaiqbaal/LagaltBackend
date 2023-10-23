@@ -38,17 +38,14 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
-            // Fetch associated projects using the repository method you already have
             List<Project> projects = projectRepository.findByOwner_UserId(id);
 
-            // Convert the projects to DTOs
             List<ProjectDTO> projectDTOs = projects.stream()
                     .map(project -> projectMapper.toDTO(project))
                     .collect(Collectors.toList());
 
             UserDTO userDTO = userMapper.toDTO(user);
 
-            // Set the projects in the DTO
             userDTO.setProjects(projectDTOs);
 
             return userDTO;
