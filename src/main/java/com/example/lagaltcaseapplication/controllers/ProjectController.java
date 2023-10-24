@@ -12,6 +12,7 @@ import com.example.lagaltcaseapplication.services.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,7 +28,10 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+
+
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_realm-admin')")
     public ResponseEntity<ProjectDTO> getProjectById(@PathVariable Long id) {
         try {
             ProjectDTO projectDTO = projectService.getProjectById(id);
@@ -48,6 +52,7 @@ public class ProjectController {
     }
 
     @GetMapping("/")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<ProjectDTO>> getAllProjects() {
         List<ProjectDTO> allProjects = projectService.getAllProjects();
         if (allProjects.isEmpty()) {

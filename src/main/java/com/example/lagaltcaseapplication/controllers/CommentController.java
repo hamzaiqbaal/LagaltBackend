@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,6 +31,7 @@ public class CommentController {
 
     @ApiOperation(value = "Get all comments for a project")
     @GetMapping("/project/{projectId}")
+    @PreAuthorize("hasRole('ROLE_user') or hasRole('ROLE_admin')")
     public ResponseEntity<List<CommentDTO>> getCommentsByProject(@PathVariable Long projectId) {
         List<Comment> comments = commentService.getCommentsByProject(projectId);
         if (comments.isEmpty()) {
@@ -43,6 +45,7 @@ public class CommentController {
 
     @ApiOperation(value = "Add a comment to a project")
     @PostMapping("/project/{projectId}")
+    @PreAuthorize("hasRole('ROLE_user') or hasRole('ROLE_admin')")
     public ResponseEntity<CommentDTO> addCommentToProject(@PathVariable Long projectId, @RequestBody CommentDTO commentDTO) {
         try {
             Comment comment = commentService.addCommentToProject(projectId, commentDTO);  // Assumes your service method returns Comment
@@ -59,6 +62,7 @@ public class CommentController {
 
     @ApiOperation(value = "Delete a comment by its ID")
     @DeleteMapping("/{commentId}")
+    @PreAuthorize("hasRole('ROLE_user') or hasRole('ROLE_admin')")
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
         try {
             commentService.deleteComment(commentId);

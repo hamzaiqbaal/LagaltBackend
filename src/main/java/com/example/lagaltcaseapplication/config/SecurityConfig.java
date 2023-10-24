@@ -2,6 +2,7 @@ package com.example.lagaltcaseapplication.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -19,9 +20,8 @@ public class SecurityConfig {
                         // Define the mappings
                         // projects/ 200
 
-                        .antMatchers("/projects/", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        // api/v1/resources/authorized 403
-                        .antMatchers("/projects/id").hasRole("Admin")
+                       // .antMatchers("/projects/", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                       // .antMatchers("/projects/id").hasRole("Admin")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer()
@@ -40,4 +40,6 @@ public class SecurityConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
     }
+
+
 }
