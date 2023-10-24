@@ -19,9 +19,9 @@ public class SecurityConfig {
                         // Define the mappings
                         // projects/ 200
 
-                        .antMatchers("/projects/", "/swagger-ui.html", "/v2/api-docs", "/swagger-resources/**", "/webjars/**").permitAll()
+                        .antMatchers("/projects/", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // api/v1/resources/authorized 403
-                        .antMatchers("/projects/id").hasRole("USER")
+                        .antMatchers("/projects/id").hasRole("Admin")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer()
