@@ -31,7 +31,7 @@ public class ProjectController {
 
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_realm-admin')")
+    @PreAuthorize("hasAuthority('ROLE_REALM-ADMIN')")
     public ResponseEntity<ProjectDTO> getProjectById(@PathVariable Long id) {
         try {
             ProjectDTO projectDTO = projectService.getProjectById(id);
