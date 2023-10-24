@@ -56,5 +56,28 @@ public class WorkApplicationServiceImpl implements WorkApplicationService {
         workApplicationRepository.delete(workApplication);
     }
 
+    @Override
+    public void deleteApplication(Long applicationId) {
+        WorkApplication workApplication = workApplicationRepository.findById(applicationId)
+                .orElseThrow(() -> new IllegalArgumentException("Application not found"));
+        workApplicationRepository.delete(workApplication);
+    }
+
+    @Override
+    public WorkApplicationDTO updateApplication(Long applicationId, WorkApplicationDTO workApplicationDTO) {
+        WorkApplication existingWorkApplication = workApplicationRepository.findById(applicationId)
+                .orElseThrow(() -> new IllegalArgumentException("Application not found"));
+
+        existingWorkApplication.setAccepted(workApplicationDTO.isAccepted()); // Note the change here
+        existingWorkApplication.setMotivation(workApplicationDTO.getMotivation());
+        // ... update other fields if needed
+
+        WorkApplication updatedWorkApplication = workApplicationRepository.save(existingWorkApplication);
+        return workApplicationMapper.toDTO(updatedWorkApplication);
+    }
+
+
+
+
 
 }

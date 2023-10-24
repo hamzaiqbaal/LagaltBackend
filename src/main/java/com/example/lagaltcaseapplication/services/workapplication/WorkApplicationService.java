@@ -12,4 +12,10 @@ public interface WorkApplicationService {
 
     void acceptApplication(Long applicationId);
 
+    void deleteApplication(Long applicationId);
+
+    WorkApplicationDTO updateApplication(Long applicationId, WorkApplicationDTO workApplicationDTO);
+
+
+
 }

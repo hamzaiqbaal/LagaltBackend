@@ -14,6 +14,7 @@ public class WorkApplicationDTO {
 
     private String motivation;
 
+
     public Long getApplicationId() {
         return applicationId;
     }

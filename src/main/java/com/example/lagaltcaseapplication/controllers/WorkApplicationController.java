@@ -32,5 +32,29 @@ public class WorkApplicationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{applicationId}")
+    public ResponseEntity<Void> deleteApplication(@PathVariable Long applicationId) {
+        try {
+            workApplicationService.deleteApplication(applicationId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{applicationId}")
+    public ResponseEntity<WorkApplicationDTO> updateApplication(@PathVariable Long applicationId, @RequestBody WorkApplicationDTO workApplicationDTO) {
+        try {
+            WorkApplicationDTO updatedWorkApplicationDTO = workApplicationService.updateApplication(applicationId, workApplicationDTO);
+            return new ResponseEntity<>(updatedWorkApplicationDTO, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }

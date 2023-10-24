@@ -30,4 +30,9 @@ public class WorkApplication {
     @Column(name = "motivation")
     private String motivation;
 
+    public void setAccepted(boolean isAccepted) {
+        this.isAccepted = isAccepted;
+    }
+
+
 }
