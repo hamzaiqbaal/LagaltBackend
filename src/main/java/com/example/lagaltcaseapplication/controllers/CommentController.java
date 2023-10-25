@@ -7,6 +7,8 @@ import com.example.lagaltcaseapplication.mapper.CommentMapper;
 import com.example.lagaltcaseapplication.models.Comment;
 import com.example.lagaltcaseapplication.services.comment.CommentService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,8 +30,12 @@ public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
 
-    @ApiOperation(value = "Get all comments for a project")
     @GetMapping("/project/{projectId}")
+    @ApiOperation(value = "Get all comments for a project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Comments found"),
+            @ApiResponse(responseCode = "404", description = "Comments not found for the project")
+    })
     public ResponseEntity<List<CommentDTO>> getCommentsByProject(@PathVariable Long projectId) {
         List<Comment> comments = commentService.getCommentsByProject(projectId);
         if (comments.isEmpty()) {
@@ -41,8 +47,13 @@ public class CommentController {
         return new ResponseEntity<>(commentDTOs, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Add a comment to a project")
     @PostMapping("/project/{projectId}")
+    @ApiOperation(value = "Add a comment to a project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Comment added"),
+            @ApiResponse(responseCode = "404", description = "Project not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     public ResponseEntity<CommentDTO> addCommentToProject(@PathVariable Long projectId, @RequestBody CommentDTO commentDTO) {
         try {
             Comment comment = commentService.addCommentToProject(projectId, commentDTO);  // Assumes your service method returns Comment
@@ -57,8 +68,13 @@ public class CommentController {
         }
     }
 
-    @ApiOperation(value = "Delete a comment by its ID")
     @DeleteMapping("/{commentId}")
+    @ApiOperation(value = "Delete a comment by its ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Comment deleted"),
+            @ApiResponse(responseCode = "404", description = "Comment not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
         try {
             commentService.deleteComment(commentId);
