@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
     public ProjectDTO toDTO(Project project) {
             ProjectDTO projectDTO = new ProjectDTO();
             projectDTO.setProjectId(project.getProjectId());
+            projectDTO.setProjectPicture(project.getProjectPicture());
             projectDTO.setTitle(project.getTitle());
             projectDTO.setDescription(project.getDescription());
             projectDTO.setStatus(project.getStatus());
@@ -77,6 +78,7 @@ import java.util.stream.Collectors;
     public Project toEntity(ProjectDTO projectDTO) {
         Project project = new Project();
         project.setProjectId(projectDTO.getProjectId());
+        project.setProjectPicture(projectDTO.getProjectPicture());
         project.setTitle(projectDTO.getTitle());
         project.setDescription(projectDTO.getDescription());
         project.setStatus(projectDTO.getStatus());

@@ -22,6 +22,10 @@ public class Project {
     @Column(name = "project_id")
     private Long projectId;
 
+    @Column(name = "project_picture")
+    private String projectPicture;
+
+
     @Column(name = "title")
     private String title;
 

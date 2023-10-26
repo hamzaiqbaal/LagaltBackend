@@ -8,6 +8,9 @@ import java.util.Set;
 
 public class ProjectDTO {
     private Long projectId;
+
+    private String projectPicture;
+
     private String title;
     private String description;
     private String status;
@@ -29,6 +32,14 @@ public class ProjectDTO {
 
 
     //GETTER AND SETTER
+
+    public String getProjectPicture() {
+        return projectPicture;
+    }
+
+    public void setProjectPicture(String projectPicture) {
+        this.projectPicture = projectPicture;
+    }
 
     public List<WorkApplicationDTO> getWorkApplications() {
         return workApplications;
