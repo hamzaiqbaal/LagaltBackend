@@ -12,6 +12,8 @@ public class UserDTO {
 
     private Long userId;
     private boolean isProfileVisible;
+
+    private String profilePicture;
     private String forName;
     private String lastName;
     private String description;
@@ -153,5 +155,14 @@ public class UserDTO {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
 
 }

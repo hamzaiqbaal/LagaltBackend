@@ -26,6 +26,9 @@ public class User {
     @Column(name = "is_profile_visible", nullable = false)
     private boolean isProfileVisible = true;
 
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
 
     @Column(name = "for_name")
     private String forName;

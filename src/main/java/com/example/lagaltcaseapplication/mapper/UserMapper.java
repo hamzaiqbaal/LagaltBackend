@@ -28,6 +28,7 @@ public class UserMapper {
         userDTO.setLastName(user.getLastName());
         userDTO.setUsername(user.getUsername());
         userDTO.setPassword(user.getPassword());
+        userDTO.setProfilePicture(user.getProfilePicture());
         userDTO.setAge(user.getAge());
         userDTO.setDescription(user.getDescription());
         userDTO.setCountry(user.getCountry());
@@ -66,6 +67,7 @@ public class UserMapper {
         user.setLastName(userDTO.getLastName());
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
+        user.setProfilePicture(userDTO.getProfilePicture());
         user.setAge(userDTO.getAge());
         user.setDescription(userDTO.getDescription());
         user.setCountry(userDTO.getCountry());
@@ -115,6 +117,10 @@ public class UserMapper {
         if (userDTO.getPassword() != null) {
             existingUser.setPassword(userDTO.getPassword());
         }
+        if (userDTO.getProfilePicture() != null) {
+            existingUser.setProfilePicture(userDTO.getProfilePicture());
+        }
+
         if (userDTO.getSkillIds() == null || userDTO.getSkillIds().isEmpty()) {
             existingUser.setSkills(new HashSet<>());
         } else {
