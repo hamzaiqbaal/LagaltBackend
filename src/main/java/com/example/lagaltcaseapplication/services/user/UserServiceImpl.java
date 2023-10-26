@@ -32,6 +32,30 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ProjectMapper projectMapper;
 
+        /*  For the keycloak
+    @Override
+    public AppUser getUserById(String uid) {
+        return userRepository.findById(uid)
+                .orElseThrow(() -> new UserNotFoundException());
+    }
+    */
+
+    /*
+    @Override
+    public AppUser addUser(String uid) {
+        // Prevents internal server error for duplicates
+        if (userRepository.existsById(uid)) {
+            throw new UserAlreadyExistsException();
+        }
+        // Create new user
+        AppUser user = new AppUser();
+        user.setUid(uid);
+        user.setComplete(false);
+        return userRepository.save(user);
+    }
+    */
+
+
     @Override
     public UserDTO getUserById(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -53,6 +77,9 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException(id);
         }
     }
+
+
+
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
